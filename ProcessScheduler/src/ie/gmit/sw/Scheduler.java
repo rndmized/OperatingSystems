@@ -38,7 +38,7 @@ public class Scheduler implements Scheduling {
 		/* Local variable avg represents the average wait time for all processes */
 		float avg=0;
 		
-		System.out.println("Round Robbin");
+		
 		/* While the number of processes finished is smaller than the total number of processes */
 		while(count < queue.size()){ 
 			/* For every process in the queue */
@@ -75,7 +75,7 @@ public class Scheduler implements Scheduling {
 						waitTime += quantum;
 						/* Decrease the remainder of the process */
 						prc.get(queue.get(i)).decreaseRemainder(quantum);
-						/* If after substracting the quantum to the remainder it is equal to 0. The process is finished */
+						/* If after subtracting the quantum to the remainder it is equal to 0. The process is finished */
 						if(prc.get(queue.get(i)).getRemainder() == 0){
 							/* Since the process is finished increment count to indicate a process from the list has finished. */
 							count++;					
@@ -85,22 +85,23 @@ public class Scheduler implements Scheduling {
 			}	
 		}
 		/* For every process in the list. Increment Average (avg)*/
+		System.out.println("**************************************************************");
 		for (int i = 0; i < queue.size(); i++) {
 			avg += prc.get(queue.get(i)).getWaitTime() - ((prc.get(queue.get(i)).getCycles()-1) * quantum);		
-			//System.out.println("P"+queue.get(i).getId() + " Wait Time: " + prc.get(queue.get(i)).getWaitTime());	
+			System.out.println("P"+queue.get(i).getId() + " Wait Time: " + prc.get(queue.get(i)).getWaitTime());	
 			System.out.println("P"+queue.get(i).getId() + " Start Time: " + prc.get(queue.get(i)).getStartTime());
-			//System.out.println("P"+queue.get(i).getId() + " Cycles: " + prc.get(queue.get(i)).getCycles());
+			System.out.println("P"+queue.get(i).getId() + " Cycles: " + prc.get(queue.get(i)).getCycles());
 		}
-		/* Divide avg bu the number of processes*/
+		/* Divide avg by the number of processes*/
+		System.out.println("**************************************************************");
 		avg /= queue.size();
-		System.out.println(avg);	
+		System.out.println("Average wait time for all processes "+avg);	
 	}
 		
 	
 	/* Implementation of First Come First Served */
 	@Override
 	public void fCFS(){
-		System.out.println("First come first served");
 		/* Call fCFS function with class variable (ArrayList) queue */
 		this.fCFS(this.queue);
 		
@@ -115,13 +116,15 @@ public class Scheduler implements Scheduling {
 		/* Local array of integers stores the wait times for every process */
 		int[] wait = new int[queue.size()];
 		
+		System.out.println("**************************************************************");
+		
 		/* For every process in the queue */
 		for ( int i = 0; i < queue.size(); i++) {
 			/* If it is the first process */
 			if ( i == 0 ){
 				/* Since the first process didn't had to wait add 0 the the wait time */
 				waitTime += 0;
-				System.out.println(queue.get(i).getId()+ ": " +waitTime);
+				System.out.println("P"+queue.get(i).getId()+ ": " +waitTime);
 				/* Set wait time from process (i) to waitTime */
 				wait[i] = waitTime;
 
@@ -130,7 +133,7 @@ public class Scheduler implements Scheduling {
 				waitTime += queue.get(i-1).getDuration();
 				/* Set wait time from process (i) to waitTime */
 				wait[i]=waitTime;
-				System.out.println(queue.get(i).getId()+ ": " +waitTime);
+				System.out.println("P"+queue.get(i).getId()+ ": " +waitTime);
 
 			}
 			/* Average increments with every wait time */
@@ -138,12 +141,12 @@ public class Scheduler implements Scheduling {
 		}
 		/* Divide avg by the number of processes in the list to obtain average */
 		avg /= queue.size();
-		System.out.println(avg);
+		System.out.println("**************************************************************");
+		System.out.println("Average wait time for all processes "+avg);
 	}
 
 	@Override
 	public void sJF() {
-		System.out.println("Shortest Job First");
 		/* Create ArrayList and assign value of a clone of queue 
 		 * (CLoning is required to avoid changes on the main list)*/
 		@SuppressWarnings("unchecked")

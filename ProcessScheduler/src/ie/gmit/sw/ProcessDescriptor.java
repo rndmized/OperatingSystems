@@ -38,11 +38,6 @@ public class ProcessDescriptor {
 		return remainder;
 	}
 	
-	/* Set remainder value */
-	private void setRemainder(int remaninder) {
-		this.remainder = remaninder;
-	}
-	
 	/* Decrease remainder by the amount provided as argument */
 	public void decreaseRemainder(int amount) {
 		this.remainder -= amount;
