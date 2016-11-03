@@ -1,5 +1,5 @@
 package ie.gmit.sw;
-
+/* Created by Albert Rando for Operating Systems Module at GMIT 2016 */
 import java.util.ArrayList;
 import java.util.Scanner;
 
