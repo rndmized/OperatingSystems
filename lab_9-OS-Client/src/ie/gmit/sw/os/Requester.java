@@ -2,18 +2,20 @@ package ie.gmit.sw.os;
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 public class Requester{
 	Socket requestSocket;
 	ObjectOutputStream out;
  	ObjectInputStream in;
  	String message;
+ 	private Scanner scan = new Scanner(System.in);
 	Requester(){}
 	void run()
 	{
 		try{
 			//1. creating a socket to connect to the server
 			
-			requestSocket = new Socket("40.117.232.73", 2004);
+			requestSocket = new Socket("127.0.0.1", 2004);
 			System.out.println("Connected to localhost in port 2004");
 			//2. get Input and Output streams
 			out = new ObjectOutputStream(requestSocket.getOutputStream());
@@ -24,9 +26,12 @@ public class Requester{
 				try{
 					message = (String)in.readObject();
 					System.out.println("server>" + message);
-					sendMessage("Hi my server");
-					message = "bye";
-					sendMessage(message);
+					if  (message.startsWith("Enter") || message.startsWith("Press")){
+						String response = scan.nextLine();
+						sendMessage(response);
+					} else if (message.equals("bye")){
+						System.out.println("Connection with server terminated.");
+					}
 				}
 				catch(ClassNotFoundException classNot){
 					System.err.println("data received in unknown format");

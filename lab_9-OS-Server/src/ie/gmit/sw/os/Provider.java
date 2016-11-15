@@ -27,13 +27,30 @@ public class Provider{
 			//4. The two parts communicate via the input and output streams
 			do{
 				try{
+					sendMessage("Enter first number:");
 					message = (String)in.readObject();
+					int numOne = Integer.parseInt(message);
 					System.out.println("client>" + message);
+					sendMessage("Enter second number:");
+					message = (String)in.readObject();
+					int numTwo = Integer.parseInt(message);
+					System.out.println("client>" + message);
+					sendMessage("Press 1 for addition or 2 for substraction:");
+					message = (String)in.readObject();
+					if(message.equals("1")){
+						sendMessage(numOne + " + " + numTwo + " = " + (numOne + numTwo));
+						
+					} else {
+						sendMessage(numOne + " - " + numTwo + " = " + (numOne - numTwo));
+					}
+					
 					if (message.equals("bye"))
 						sendMessage("bye");
 				}
 				catch(ClassNotFoundException classnot){
 					System.err.println("Data received in unknown format");
+				}catch(Exception e){
+					System.err.println("Data received not in Integer format");
 				}
 			}while(!message.equals("bye"));
 		}
