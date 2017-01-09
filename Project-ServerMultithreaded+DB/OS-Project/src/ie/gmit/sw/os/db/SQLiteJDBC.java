@@ -11,9 +11,16 @@ import java.util.Date;
 
 import ie.gmit.sw.os.operations.Operation;
 
+/**
+ * @author RnDMizeD
+ *
+ */
 public class SQLiteJDBC {
-
-	public synchronized boolean login(String username, String pass) {
+	/**
+	 * Queries DB and returns true or false whether the user and password match
+	 *
+	 */
+	public boolean login(String username, String pass) {
 		Connection c = null;
 		PreparedStatement stmt = null;
 		try {
@@ -44,8 +51,11 @@ public class SQLiteJDBC {
 			return false;
 		}
 	}
-
-	public synchronized boolean signUp(Operation op) {
+	/**
+	 * Inserts provided info into the db.
+	 *
+	 */
+	public boolean signUp(Operation op) {
 
 		if (this.check_account(op) && this.check_username(op.getUser())) {
 			this.insert_holder(op);
@@ -57,8 +67,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	private synchronized boolean insert_holder(Operation op) {
+	/**
+	 * Insert data into holders table
+	 *
+	 */
+	private boolean insert_holder(Operation op) {
 		Connection c = null;
 		PreparedStatement stmt = null;
 		try {
@@ -82,8 +95,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	private synchronized boolean insert_user(Operation op) {
+	/**
+	 * Insert data into users table
+	 *
+	 */
+	private boolean insert_user(Operation op) {
 
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -107,8 +123,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	private synchronized boolean insert_user_holder(Operation op) {
+	/**
+	 * Inserts data into user_holder table
+	 *
+	 */
+	private boolean insert_user_holder(Operation op) {
 
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -132,8 +151,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized void insert_log(int account, String log_message) {
+	/**
+	 * Insert data into log table
+	 *
+	 */
+	public void insert_log(int account, String log_message) {
 		Connection c = null;
 		PreparedStatement stmt = null;
 		try {
@@ -155,8 +177,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	private synchronized boolean check_account(Operation op) {
+	/**
+	 * Check in db if account number is available for use
+	 *
+	 */
+	private boolean check_account(Operation op) {
 		System.out.println("Checking Account.");
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -192,8 +217,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized boolean check_username(String username) {
+	/**
+	 * Check in db if username is available to use
+	 *
+	 */
+	public boolean check_username(String username) {
 		System.out.println("Checking Username");
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -228,8 +256,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized boolean check_password(Operation op) {
+	/**
+	 * Check if password match db
+	 *
+	 */
+	public boolean check_password(Operation op) {
 		System.out.println("Checking Password");
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -264,8 +295,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized double getBalance(int account) {
+	/**
+	 * Return balance of a given account
+	 *
+	 */
+	public double getBalance(int account) {
 
 		System.out.println("Checking Balance.");
 		Connection c = null;
@@ -296,8 +330,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized Operation getAccountDetails(String username) {
+	/**
+	 * Return account details
+	 *
+	 */
+	public Operation getAccountDetails(String username) {
 
 		System.out.println("Getting user details.");
 		Operation op = new Operation();
@@ -333,8 +370,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized boolean updatePassword(String username, String new_pwd) {
+	/**
+	 * updates password for a user in db
+	 *
+	 */
+	public boolean updatePassword(String username, String new_pwd) {
 
 		System.out.println("Updating user password.");
 
@@ -359,8 +399,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized boolean updateName(int account, String new_name) {
+	/**
+	 * Changes name of an account holder
+	 *
+	 */
+	public boolean updateName(int account, String new_name) {
 
 		System.out.println("Updating user´s name.");
 		System.out.println("New name: " + new_name + " for Account Number: " + account);
@@ -386,8 +429,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized boolean updateAddress(int account, String new_address) {
+	/**
+	 * Change address of an account holder
+	 *
+	 */
+	public boolean updateAddress(int account, String new_address) {
 
 		System.out.println("Updating user´s address.");
 
@@ -413,8 +459,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized boolean updateUsername(String username, String new_username) {
+	/**
+	 * Change username of an account holder
+	 *
+	 */
+	public boolean updateUsername(String username, String new_username) {
 
 		System.out.println("Updating user username.");
 
@@ -439,8 +488,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized boolean updateBalance(int account, double amount) {
+	/**
+	 * update balance of a given account by a given amount
+	 *
+	 */
+	public boolean updateBalance(int account, double amount) {
 
 		System.out.println("Updating user´s balance.");
 
@@ -466,8 +518,11 @@ public class SQLiteJDBC {
 		}
 
 	}
-
-	public synchronized ArrayList<String> getTransactions(int account){
+	/**
+	 * Returns a list with the last ten transactions of a given account from the log
+	 *
+	 */
+	public ArrayList<String> getTransactions(int account){
 		ArrayList<String> log_list = new ArrayList<String>();
 		
 		Connection c = null;
