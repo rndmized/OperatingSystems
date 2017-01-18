@@ -11,7 +11,7 @@ import ie.gmit.sw.os.operations.Operation;
 import ie.gmit.sw.os.operations.Response;
 /**
  * @author RnDMizeD
- *
+ * @version 1.0
  */
 public class EchoServer {
 
